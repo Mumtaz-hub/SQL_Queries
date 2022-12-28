@@ -10,7 +10,7 @@ WHERE e1.salary > (SELECT AVG(e3.salary)
                    FROM employees e3
                    WHERE e3.department_id = e1.department_id);
 
-                   /*
-                    This query selects the employee ID, first name, last name, salary, and average salary in the same department for all employees who have a salary higher than 
-                    the average salary in their department.
-                   */
+/*
+This query selects the employee ID, first name, last name, salary, and average salary in the same department for all employees who have a salary higher than 
+the average salary in their department.
+ */
