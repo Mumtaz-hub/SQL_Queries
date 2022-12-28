@@ -1,0 +1,20 @@
+SELECT e.employee_id,
+       e.first_name,
+       e.last_name,
+       e.hire_date,
+       CAST(e.hire_date AS CHAR(10)) AS hire_date_formatted,
+       DATEDIFF(CURRENT_DATE, e.hire_date) AS days_employed,
+       CAST(DATEDIFF(CURRENT_DATE, e.hire_date) / 365 AS INTEGER) AS years_employed
+FROM employees e
+WHERE e.hire_date BETWEEN '2020-01-01' AND '2020-12-31'
+  AND e.salary > 50000
+ORDER BY e.last_name ASC, e.first_name ASC;
+
+/*
+This query selects the employee ID, first name, last name, hire date, and several calculated columns for all employees who were hired in 2020 
+and have a salary greater than $50,000. The calculated columns include the hire date formatted as a string in the format "YYYY-MM-DD", the number of days 
+the employee has been employed, and the number of years the employee has been employed.
+
+The CAST function is used to convert the "hire_date" column to a string in the desired format, 
+and the DATEDIFF function is used to calculate the number of days between the current date and the hire date. 
+*/
