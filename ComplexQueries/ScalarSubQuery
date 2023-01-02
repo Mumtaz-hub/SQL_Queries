@@ -1,4 +1,4 @@
-/* It always return 1 row and 1 column */
+/* Subquery always return 1 row and 1 column */
 
 select * 
 from employee 
