@@ -1,0 +1,27 @@
+-- Subquery related to outer query. It means processing of 
+-- subquery depends on the values that are returned from the outer query
+
+-- Find the employees in each department who earn more than avg salary of 
+--each department
+
+
+
+select *
+from epmloyee e1
+where salary > (
+                  select avg(salary) 
+                  from employee e2
+                  where e2.dept_name = e1.dept_name
+                )
+                
+-- for every single record(row) SQL execute subquery each time
+-- this query is not preferrable when millons of records in table
+
+--- Find department who do not have any employees
+
+select *
+from department d
+where not exists (
+                  select 1 from employee e
+                  where e.dept_name = d.dept_name
+                 )
