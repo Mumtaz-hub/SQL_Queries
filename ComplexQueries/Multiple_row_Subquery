@@ -1,0 +1,21 @@
+/* Multiple row subquery */
+
+/* Subquery which returns multiple column and Multiple row
+-- Find the employees who earn the highest salary in each department
+
+select *
+from employee
+where (dept_name, salary) in (
+select dept_name, max(salary)
+from employee
+group by dept_name )
+
+/* Subquery which returns only 1 column and multiple rows
+
+-- find department who do not have any employees
+select *
+from department
+where  dept_name not in (
+select distinct dept_name
+from employee)
+
