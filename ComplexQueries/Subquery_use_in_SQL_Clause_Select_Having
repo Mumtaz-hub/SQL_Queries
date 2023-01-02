@@ -1,0 +1,33 @@
+-- using a subquery in select clause (not recommended)
+-- Find all employee details and add remarks to those employees who earn
+-- more than the average pay
+
+select *
+, (case when salary > ( select avg(salary) from employee
+          then 'Higher than average'
+          else null
+) as remark
+from employee
+
+
+
+
+--- not the best method, better to use join condition
+
+select *
+, (case when salary > avg_sal.sal
+          then 'Higher than average'
+          else null
+) as remark
+from employee
+cross join (select avg(salary) sal from employee) avg_sal
+
+-- Having clause
+
+-- Find the stores who have sold more units than the average units 
+-- sold by all stores
+
+select store_name, sum(quantity)
+from sales
+group by store_name
+having sum(quantity) > ( select avg(quantity) from sales)
