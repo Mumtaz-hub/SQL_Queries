@@ -1,0 +1,38 @@
+--Insert
+-- Insert data to employee history table. Make sure not insert duplicate records
+
+
+insert into employee_history
+select e.emp_id, e.emp_name, d.dept_name, e.salary, d.location
+from employee e
+join department d on d.dept_name = e.dept_name
+where not exists ( select 1 
+                   from employee_history eh
+                   where eh.emp_id=e.emp_id )
+                   
+                   
+ -- Update
+ -- Give 10% increment to all employees in toronto location based on maximum
+ -- salary earned by an emp in each dept. only consider employees 
+ -- in employee_history table
+ 
+ update employee e
+  set salary = ( select max(salary) + ( max(salary) * 0.1)
+                  from employee_history eh
+                  where eh.dept_name = e.dept_name)
+ where e.dept_name in ( select dept_name
+  	                   from department
+                       where location = 'toronto' )
+ and e.emp_id in (select emp_id from employee_history) 
+ 
+ -- Delete
+ -- Delete all employees who do not have employees
+ 
+ delete from department
+ where dept_name in ( select dept_name
+                        from departmnet d
+                        where not exists (select 1 
+                                            from employee e
+                                            where e.dept_name= d-dept_name )
+                        )
+ 
