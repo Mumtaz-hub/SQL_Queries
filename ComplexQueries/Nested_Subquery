@@ -24,13 +24,13 @@ select *
   
   --- not the best way to write this query
   
-  -- Modify tghis query using with clause
+  -- Modify this query using with clause
   
   with sales as
   (
     select store_name, sum(price) as total_sales
     from sales
-    group_by store_name
+    group by store_name
   )
   Select *
   from sales
