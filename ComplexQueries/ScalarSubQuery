@@ -1,4 +1,5 @@
 /* Subquery always return 1 row and 1 column */
+-- Find employees who has more than avg. salary
 
 select * 
 from employee 
