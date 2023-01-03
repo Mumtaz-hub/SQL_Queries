@@ -3,14 +3,11 @@
 -- more than the average pay
 
 select *
-, (case when salary > ( select avg(salary) from employee
+, (case when salary > (select avg(salary) from employee)
           then 'Higher than average'
           else null
 ) as remark
 from employee
-
-
-
 
 --- not the best method, better to use join condition
 
