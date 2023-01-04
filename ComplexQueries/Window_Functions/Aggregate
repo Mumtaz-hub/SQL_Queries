@@ -1,0 +1,19 @@
+-- Find max salary from each department
+
+select dept_name, max(salary) as max_salary
+from employee
+group by dept_name
+
+-- Find max salary with all other employee details
+
+select e.*
+max(salary) over() as max_salary
+from employee e
+
+-- Find max salary from each department with all other employee details
+select e.*
+max(salary) over(partition by dept_name) as max_salary
+from employee e
+
+
+
