@@ -1,0 +1,19 @@
+-- Fetch the top 3 employees in each department earning the max salary
+
+--Rank
+select * from (
+                  select e.*,
+                  rank() over(partition by dept_name order by salary desc) as rnk
+                  from employee e
+              ) x
+ where x.rnk < 4
+ 
+ -- Dense_rank
+ select * from (
+                  select e.*,
+                  dense_rank() over(partition by dept_name order by salary desc) as dense_rnk
+                  from employee e
+              ) x
+ where x.dense_rnk < 4
+ 
+ 
