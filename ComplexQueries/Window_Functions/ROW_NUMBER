@@ -1,0 +1,13 @@
+--Add unique value to no. of records based on each department
+select e.*,
+row_number() over(partition by dept_name) as rn
+from employee e
+
+-- Fetch the first 2 employees from each department to join the company
+
+select *from (
+                select e.*,
+                row_number() over(partition by dept_name order by emp_id) as rn
+                from employee e
+              ) x
+ where x.rn < 3
