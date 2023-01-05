@@ -1,0 +1,42 @@
+-- display the most expensive product under each category (corresponding to each category)
+
+select *,
+first_value(product_name) over(partition by product_category order by price desc) as most_expensive_product 
+from product
+
+-- display the least expensive product under each category (corresponding to each category)
+
+select *,
+last_value(product_name) 
+over(
+  partition by product_category order by price desc
+  range between unbounded preceding and unbound following
+) as lest_expensive_product 
+from product
+
+----- Notes 
+range between unbounded preceding and Current row -- default it takes this frame clause
+range between unbounded preceding and unbound following (here, duplicate data also considered till last row)
+rows between unbounded preceding and unbound following
+rows between unbounded preceding and current row ( (here, current row considered  as last row)
+range between 2 preceding and 2 following  ( consider 2 rows prior to the current row and 2 rows after the current row)
+
+
+------------- Alternate way to write window functions
+
+select *,
+first_value(product_name) 
+over w 
+as lest_expensive_product 
+from product
+window w as (partition by product_category order by price desc
+  range between unbounded preceding and unbound following)
+
+
+select *,
+last_value(product_name) 
+over w 
+as lest_expensive_product 
+from product
+window w as (partition by product_category order by price desc
+  range between unbounded preceding and unbound following)
