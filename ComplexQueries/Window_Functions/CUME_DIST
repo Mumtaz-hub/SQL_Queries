@@ -1,0 +1,16 @@
+/*CUME_DIST ( Cumulative distribution)
+   value --> 1 <= CUME_DIST > 0
+    Formula = Current row no ( or row no with value same as current row ) / total no. of rows */
+
+
+-- query to fetch all products which are constituting the first 30%
+-- of the data in products table based on price
+
+select product_name, (cume_dist_percentage || '%' as cume_dist_percentage
+from (
+        select *,
+        cume_dist() over (order by price desc) as cume_distribution,
+        round(cume_dist() over (order by price desc) as cume_distribution :: numeric * 100, 2) as cume_dist_percentage
+        from product
+       ) x
+ where x.cume_dist_percentage <= 30
