@@ -1,0 +1,16 @@
+/*
+PERCENT_RANK (relative rank of the current row / percentage ranking)
+/* value ---> 1 <= PERCENT_RANK > 0
+FORMULA = Current Row No - 1 / Total no of rows - 1
+*/
+
+-- Query to identify how much percentage more expensive is "Galaxy Z Fold 3" when compared to all products
+
+select product_name, per_rank
+from (
+          select *
+          percent_rank() over(order by price) as percentage_rank,
+          round(percent_rank() over(order by price) :: numeric * 100, 2) as per_rank
+          from product
+       ) x
+ where x.product_name = 'Galaxy Z Fold 3'
