@@ -1,0 +1,45 @@
+
+--Full outer join is a combination of left outer join and right outer join. It returns all the rows from both the tables. If there is no match between the tables, it returns null values for the unmatched rows.
+
+select e.emp_name, e.salary, d.dept_name
+from employee e
+full outer join department d on e.dept_id = d.dept_id
+
+--cross join is a combination of inner join and outer join. It returns all the rows from both the tables. If there is no match between the tables, it returns null values for the unmatched rows.
+--no. of records in result = no. of records in table 1 * no. of records in table 2
+
+select e.emp_name, e.salary, d.dept_name
+from employee e
+cross join department d
+
+-- Write a query to fetch the employee name and their corresponding department name. If the employee does not belong to any department, then the department name should be displayed as 'No Department'.
+-- Also make sure to display company name and location corresponding to each employee.
+
+select e.emp_name, d.dept_name, c.company_name, c.location
+from employee e
+inner join department d on e.dept_id = d.dept_id
+cross join company c
+
+--self join is a join of a table with itself. It is used to compare values in a table with other values in the same table.
+-- no. of records in result = no. of records in table * no. of records in table
+
+-- write a query for self join 
+select e1.emp_name, e1.salary, e2.emp_name, e2.salary
+from employee e1
+join employee e2 on e1.emp_id <> e2.emp_id
+
+-- write a query to fetch the child name and their age corresponding to their parent name and age. If the child does not have a parent, then the parent name should be displayed as 'No Parent'.
+select child.name as child_name, child.age as child_age, parent.name as parent_name, parent.age as parent_age
+from family as child
+join family as parent on child.parent_id = parent.family_id
+
+select child.name as child_name, child.age as child_age, parent.name as parent_name, parent.age as parent_age
+from family as child
+left join family as parent on child.parent_id = parent.family_id
+
+
+--natural join is a join of two tables based on the common column names. It is used to join two tables based on the common column names. It is similar to inner join, but it does not require the use of ON clause.
+
+select e.emp_name, d.dept_name
+from employee e
+natural join department d
