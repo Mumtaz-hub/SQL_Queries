@@ -15,7 +15,7 @@ step 2: recursive query execute based on output of base query iteratively, for n
 -- Display number from 1 to 10 without using any in built functions
 
 with recursive numbers as
-    (select 1 as name
+    (select 1 as number
     union
     select n + 1
     from numbers 
