@@ -1,0 +1,25 @@
+ -- syntax
+/* with [RECURSIVE] CTE_name as
+(
+    select query (Non Recursive query or base query)
+    union [all]
+    select query(Recursive query using CTE_name [with termination condition])
+) 
+Select *from CTE_name
+
+step 1: first execute base query
+step 2: recursive query execute based on output of base query iteratively, for next iteration, it takes output of previous iteration and execute it untile it termination condition become true
+
+*/
+
+-- Display number from 1 to 10 without using any in built functions
+
+with recursive numbers as
+    (select 1 as name
+    union
+    select n + 1
+    from numbers 
+    where n < 10
+    )
+select *from numbers
+

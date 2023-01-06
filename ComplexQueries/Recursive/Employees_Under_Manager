@@ -1,0 +1,13 @@
+-- find the hierarchy of employees under a given manager 'thomas'
+
+with recursive emp_hierarchy as
+(
+    select id, [name], Manager_id, designation , 1 as [level]
+    from Employees
+    where [name] = 'thomas'
+    union all
+    select E.id, E.name, E.Manager_id, E.designation, eh.[level] + 1 +1 as [level]
+    from emp_hierarchy eh
+    inner join [Employee] E on eh.id = E.Manager_id
+)
+select *from emp_hierarchy
