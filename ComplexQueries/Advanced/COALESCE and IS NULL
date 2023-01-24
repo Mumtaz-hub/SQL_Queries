@@ -1,0 +1,6 @@
+/*Using COALESCE or ISNULL: These functions are used to handle NULL values in a query. 
+COALESCE returns the first non-NULL value in a list of expressions, 
+while ISNULL returns a specified value if the input expression is NULL.*/
+
+SELECT COALESCE(phone, email, 'N/A') as contact
+FROM customers;
