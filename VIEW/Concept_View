@@ -1,0 +1,41 @@
+-- view is a database object that is created by using the CREATE VIEW statement
+-- view is a virtual table that is created by using the CREATE VIEW statement
+-- view is created over an SQL query
+-- view does not store any data
+-- view is used to simplify the complex SQL queries
+
+-- Rules when using CREATE or REPLACE VIEW
+--1. Cannot change column names
+--2. Cannot change column data types
+--3. Cannot change column order
+-- Fetch the order summary
+
+create or replace view vw_order_summary 
+as
+select o.order_id, o.date, p.product_name, o.quantity, p.price, 
+(o.quantity * p.price) - ((o.quantity * p.price) * disc_percent::float/100) as cost
+from customer c 
+join order_details o on c.customer_id = o.customer_id
+join  product p on o.product_id = p.product_id
+
+select *from vw_order_summary;
+
+-- Why we use view?
+--1. security : By hiding the query used to generate the view, we can hide the data from the users.
+--2. simplify complex queries : sharing a view is better than complex queries, avoid rewriting the same complex queries multipletimes
+--3. specific user can see only specific data
+
+create role jones
+login
+password 'jones123'
+
+grant select on vw_order_summary to jones
+
+-- Path: VIEW\CreateView
+-- ALTER VIEW
+-- ALTER VIEW is used to modify the existing view. It can be used to add, delete or modify the columns of the view.
+alter view vw_order_summary remane column cost to total_cost
+
+-- DROP VIEW
+-- DROP VIEW is used to delete the existing view. It can be used to delete the view from the database.
+drop view vw_order_summary;
