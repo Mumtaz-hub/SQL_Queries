@@ -6,7 +6,7 @@ case when x.buckets = 1 then 'Expensive phones'
      when x.buckets = 3 then 'Cheaper phones' End phone_category
 from (
           select *
-          ntile(3) over (order by price desc) as busckets
+          ntile(3) over (order by price desc) as buckets
           from product
           where product_category = 'phone'
        ) x

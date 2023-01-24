@@ -1,0 +1,5 @@
+/* Using EXISTS and NOT EXISTS: These operators are used to determine whether a subquery returns any rows. 
+EXISTS is used to check for the existence of rows, while NOT EXISTS is used to check for the absence of rows. */
+
+SELECT * FROM orders
+WHERE EXISTS (SELECT 1 FROM order_items WHERE order_id = orders.order_id);
