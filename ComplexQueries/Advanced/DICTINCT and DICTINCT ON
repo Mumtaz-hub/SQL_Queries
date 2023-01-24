@@ -1,0 +1,6 @@
+/*Using DISTINCT and DISTINCT ON: DISTINCT is used to remove duplicate rows from the result set, 
+while DISTINCT ON is used to remove duplicate rows based on a specific column or set of columns.*/
+
+SELECT DISTINCT ON (product_id) product_id, price
+FROM products
+ORDER BY product_id, price DESC;
