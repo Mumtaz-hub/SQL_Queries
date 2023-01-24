@@ -1,0 +1,8 @@
+/*Using WITH ROLLUP and WITH CUBE: These clauses are used in conjunction with the GROUP BY clause to generate subtotals 
+and grand totals for multiple levels of aggregation. WITH ROLLUP generates subtotals that roll up to a grand total, while WITH CUBE
+ generates subtotals and grand totals for all possible combinations of columns in the GROUP BY clause.*/
+
+SELECT customer_id, product_id, SUM(quantity) as total_quantity
+FROM order_items
+GROUP BY customer_id, product_id
+WITH ROLLUP;
