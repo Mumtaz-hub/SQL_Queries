@@ -1,0 +1,5 @@
+/* Using LIKE and NOT LIKE: These operators are used to perform pattern matching on text data. LIKE is used to match values that match a specific pattern, 
+while NOT LIKE is used to match values that do not match a specific pattern. */
+
+SELECT * FROM customers
+WHERE email NOT LIKE '%gmail.com';
